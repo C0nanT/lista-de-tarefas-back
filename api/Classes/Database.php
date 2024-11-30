@@ -1,6 +1,7 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '../../../vendor/autoload.php';
+
 
 use Dotenv\Dotenv;
 
@@ -11,13 +12,13 @@ class Database
 
     private function __construct()
     {
-        $dotenv = Dotenv::createImmutable(__DIR__);
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
         $dotenv->load();
 
         $host = $_ENV['DB_HOST'];
         $dbName = $_ENV['DB_NAME'];
         $username = $_ENV['DB_USER'];
-        $password = $_ENV['DB_PASS'];
+        $password = $_ENV['DB_PASS'] ?? '';
         $charset = $_ENV['DB_CHARSET'];
 
         $dsn = "mysql:host={$host};dbname={$dbName};charset={$charset}";
@@ -49,7 +50,7 @@ class Database
     {
     }
 
-    private function __wakeup()
+    public function __wakeup()
     {
     }
 }
