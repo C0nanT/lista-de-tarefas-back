@@ -7,15 +7,15 @@ try {
     $pdo = Database::getInstance()->getConnection();
     $faker = Faker\Factory::create();
 
-    $result = $pdo->query("SHOW TABLES LIKE 'Tarefas'");
+    $result = $pdo->query("SHOW TABLES LIKE 'Tasks'");
 
     if ($result->rowCount() > 0) {
-        $pdo->exec("DROP TABLE Tarefas");
+        $pdo->exec("DROP TABLE Tasks");
     }
 
-    $sql = "CREATE TABLE IF NOT EXISTS Tarefas (
+    $sql = "CREATE TABLE IF NOT EXISTS Tasks (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                text VARCHAR(255) NOT NULL,
+                description VARCHAR(255) NOT NULL,
                 done BOOLEAN NOT NULL DEFAULT FALSE,
                 category VARCHAR(50) NOT NULL DEFAULT 'Outros',
                 doneAt DATE,
@@ -23,14 +23,14 @@ try {
                 limit_date DATE);";
 
         $pdo->exec($sql);
-    echo "Tabela 'Tarefas' criada com sucesso.<br>";
+    echo "Tabela 'Tasks' criada com sucesso.<br>";
     
     $data = [];
     $categories = ['Frontend', 'Backend', 'Banco de dados', 'DevOps', 'Mobile', 'Outros'];
 
     for ($i = 0; $i < 10; $i++) {
         $data[] = [
-            'text' => $faker->sentence,
+            'description' => $faker->sentence,
             'done' => $faker->boolean ? 1 : 0,
             'category' => $faker->randomElement($categories),
             'doneAt' => $faker->optional()->date,
@@ -40,8 +40,8 @@ try {
     }
 
     $stmt = $pdo->prepare("
-            INSERT INTO Tarefas (text, done, category, doneAt, createdAt, limit_date)
-            VALUES (:text, :done, :category, :doneAt, :createdAt, :limit_date)
+            INSERT INTO Tasks (description, done, category, doneAt, createdAt, limit_date)
+            VALUES (:description, :done, :category, :doneAt, :createdAt, :limit_date)
     ");
 
     foreach ($data as $item) {
