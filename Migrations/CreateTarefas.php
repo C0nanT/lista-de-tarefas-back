@@ -6,7 +6,11 @@ require_once '../vendor/autoload.php';
 try {
     $pdo = Database::getInstance()->getConnection();
 
-    $sql = "CREATE TABLE IF NOT EXISTS Tarefas (
+    $result = $pdo->query("SHOW TABLES LIKE 'Tarefas'");
+    if ($result->rowCount() > 0) {
+        echo "A tabela 'Tarefas' já existe.<br>";
+    } else {
+        $sql = "CREATE TABLE IF NOT EXISTS Tarefas (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 text VARCHAR(255) NOT NULL,
                 done BOOLEAN NOT NULL DEFAULT FALSE,
@@ -15,8 +19,9 @@ try {
                 createdAt DATE NOT NULL,
                 `limit` DATE);";
 
-    $pdo->exec($sql);
-    echo "Tabela 'Tarefas' criada com sucesso.\n";
+        $pdo->exec($sql);
+        echo "Tabela 'Tarefas' criada com sucesso.<br>";
+    }
 
     $faker = Faker\Factory::create();
     $data = [];
@@ -42,7 +47,7 @@ try {
         $stmt->execute($item);
     }
 
-    echo "Dados inseridos com sucesso.\n";
+    echo "Dados inseridos com sucesso.<br>";
 
 } catch (PDOException $e) {
     echo "Erro ao criar a tabela ou inserir os dados: " . $e->getMessage();

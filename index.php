@@ -41,9 +41,7 @@
 <body>
     <div class="container">
         <h1>Lista de Tarefas Backend</h1>
-        <button class="button" onclick="window.location.href='Migrations/CreateTarefas.php'">Criar tabela
-            Tarefas</button>
-        <!-- <button class="button" onclick="window.location.href='page2.php'">Go to Page 2</button> -->
+        <button class="button" onclick="window.location.href='Migrations/CreateTarefas.php'">Criar ou Alimentar a tabela Tarefas</button>
     </div>
 </body>
 
