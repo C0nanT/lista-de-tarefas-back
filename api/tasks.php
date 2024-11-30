@@ -7,10 +7,6 @@ $data = json_decode(file_get_contents('php://input'), true);
 logMessage("Requisição recebida: " . $_SERVER['REQUEST_METHOD']);
 logMessage("Dados recebidos: " . json_encode($data, JSON_UNESCAPED_UNICODE));
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: *");
-header("Access-Control-Allow-Headers: *");
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     header("Access-Control-Allow-Origin: *");
