@@ -5,6 +5,7 @@ include_once 'Classes/Tasks.php';
 $data = json_decode(file_get_contents('php://input'), true);
 
 logMessage("Requisição recebida: " . $_SERVER['REQUEST_METHOD']);
+logMessage("Dados recebidos: " . json_encode($data, JSON_UNESCAPED_UNICODE));
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!empty($errors)) {
-        logMessage("Erros de validação: " . json_encode($errors));
+        logMessage("Erros de validação: " . json_encode($errors, JSON_UNESCAPED_UNICODE));
         echo json_encode(['status' => 'ERROR', 'errors' => $errors], JSON_UNESCAPED_UNICODE);
         exit;
     } else {
@@ -36,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $tarefas->createTask($description, $category, $limitDate);
 
-            logMessage("Tarefa criada com sucesso: " . json_encode($data));
+            logMessage("Tarefa criada com sucesso: " . json_encode($data, JSON_UNESCAPED_UNICODE));
             echo json_encode(['status' => 'OK', 'message' => 'Tarefa criada com sucesso!'], JSON_UNESCAPED_UNICODE);
         } catch (Exception $e) {
             logMessage("Erro ao criar tarefa: " . $e->getMessage());
@@ -80,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!empty($errors)) {
-        logMessage("Erros de validação: " . json_encode($errors));
+        logMessage("Erros de validação: " . json_encode($errors, JSON_UNESCAPED_UNICODE));
         echo json_encode(['status' => 'ERROR', 'errors' => $errors], JSON_UNESCAPED_UNICODE);
         exit;
     } else {
@@ -89,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $tarefas->updateTask($id, $description, $category, $limitDate);
 
-            logMessage("Tarefa atualizada com sucesso: " . json_encode($data));
+            logMessage("Tarefa atualizada com sucesso: " . json_encode($data, JSON_UNESCAPED_UNICODE));
             echo json_encode(['status' => 'OK', 'message' => 'Tarefa atualizada com sucesso!'], JSON_UNESCAPED_UNICODE);
         } catch (Exception $e) {
             logMessage("Erro ao atualizar tarefa: " . $e->getMessage());
