@@ -102,7 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    $id = isset($data['id']) ? (int) $data['id'] : 0;
+
+    $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
     if ($id <= 0) {
         logMessage("Erro de validação: O campo ID é obrigatório.");
