@@ -10,5 +10,6 @@ $pdo = Database::getInstance()->getConnection();
 
 function logMessage($message)
 {
-    error_log($message . "\n", 3, __DIR__ . '/logs/tasks.log');
+    $timestamp = date('Y-m-d H:i:s');
+    error_log("[$timestamp] $message\n", 3, __DIR__ . '/../logs/tasks.log');
 }
