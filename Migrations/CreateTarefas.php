@@ -14,15 +14,17 @@ try {
     }
 
     $sql = "CREATE TABLE IF NOT EXISTS Tasks (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                description VARCHAR(255) NOT NULL,
-                done BOOLEAN NOT NULL DEFAULT FALSE,
-                category VARCHAR(50) NOT NULL DEFAULT 'Outros',
-                doneAt DATE,
-                createdAt DATE NOT NULL DEFAULT CURRENT_DATE,
-                limit_date DATE);";
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        description VARCHAR(255) NOT NULL,
+        done BOOLEAN NOT NULL DEFAULT FALSE,
+        category VARCHAR(50) NOT NULL DEFAULT 'Outros',
+        doneAt DATE,
+        createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        limit_date DATE
+    );";
 
-        $pdo->exec($sql);
+    $pdo->exec($sql);
+
     echo "Tabela 'Tasks' criada com sucesso.<br>";
     
     $data = [];
@@ -34,7 +36,7 @@ try {
             'done' => $faker->boolean ? 1 : 0,
             'category' => $faker->randomElement($categories),
             'doneAt' => $faker->optional()->date,
-            'createdAt' => $faker->date,
+            'createdAt' => date('Y-m-d'),
             'limit_date' => $faker->optional()->date
         ];
     }
