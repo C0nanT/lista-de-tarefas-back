@@ -2,12 +2,9 @@
 include_once 'utils.php';
 include_once 'Classes/Tasks.php';
 
-header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-
 $data = json_decode(file_get_contents('php://input'), true);
+
+logMessage("Requisição recebida: " . $_SERVER['REQUEST_METHOD']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -30,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!empty($errors)) {
+        logMessage("Erros de validação: " . json_encode($errors));
         echo json_encode(['status' => 'ERROR', 'errors' => $errors], JSON_UNESCAPED_UNICODE);
         exit;
     } else {
@@ -38,8 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $tarefas->createTask($description, $category, $limitDate);
 
+            logMessage("Tarefa criada com sucesso: " . json_encode($data));
             echo json_encode(['status' => 'OK', 'message' => 'Tarefa criada com sucesso!'], JSON_UNESCAPED_UNICODE);
         } catch (Exception $e) {
+            logMessage("Erro ao criar tarefa: " . $e->getMessage());
             echo json_encode(['status' => 'ERROR', 'error' => '#01 - ' . $e->getMessage()], JSON_UNESCAPED_UNICODE);
         }
     }
@@ -49,8 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $tasks = $tarefas->getTasks();
 
+        logMessage("Tarefas recuperadas com sucesso");
         echo json_encode(['status' => 'OK', 'tasks' => $tasks], JSON_UNESCAPED_UNICODE);
     } catch (Exception $e) {
+        logMessage("Erro ao recuperar tarefas: " . $e->getMessage());
         echo json_encode(['status' => 'ERROR', 'error' => '#01 - ' . $e->getMessage()], JSON_UNESCAPED_UNICODE);
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
@@ -78,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!empty($errors)) {
+        logMessage("Erros de validação: " . json_encode($errors));
         echo json_encode(['status' => 'ERROR', 'errors' => $errors], JSON_UNESCAPED_UNICODE);
         exit;
     } else {
@@ -86,8 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $tarefas->updateTask($id, $description, $category, $limitDate);
 
+            logMessage("Tarefa atualizada com sucesso: " . json_encode($data));
             echo json_encode(['status' => 'OK', 'message' => 'Tarefa atualizada com sucesso!'], JSON_UNESCAPED_UNICODE);
         } catch (Exception $e) {
+            logMessage("Erro ao atualizar tarefa: " . $e->getMessage());
             echo json_encode(['status' => 'ERROR', 'error' => '#01 - ' . $e->getMessage()], JSON_UNESCAPED_UNICODE);
         }
     }
@@ -95,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = isset($data['id']) ? (int) $data['id'] : 0;
 
     if ($id <= 0) {
+        logMessage("Erro de validação: O campo ID é obrigatório.");
         echo json_encode(['status' => 'ERROR', 'errors' => ['O campo ID é obrigatório.']], JSON_UNESCAPED_UNICODE);
         exit;
     } else {
@@ -103,11 +109,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $tarefas->deleteTask($id);
 
+            logMessage("Tarefa excluída com sucesso: ID " . $id);
             echo json_encode(['status' => 'OK', 'message' => 'Tarefa excluída com sucesso!'], JSON_UNESCAPED_UNICODE);
         } catch (Exception $e) {
+            logMessage("Erro ao excluir tarefa: " . $e->getMessage());
             echo json_encode(['status' => 'ERROR', 'error' => '#01 - ' . $e->getMessage()], JSON_UNESCAPED_UNICODE);
         }
     }
 } else {
+    logMessage("Método não permitido: " . $_SERVER['REQUEST_METHOD']);
     echo json_encode(['status' => 'ERROR', 'error' => 'Método não permitido.'], JSON_UNESCAPED_UNICODE);
 }
