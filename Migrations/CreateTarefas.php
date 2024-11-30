@@ -5,25 +5,26 @@ require_once '../vendor/autoload.php';
 
 try {
     $pdo = Database::getInstance()->getConnection();
+    $faker = Faker\Factory::create();
 
     $result = $pdo->query("SHOW TABLES LIKE 'Tarefas'");
+
     if ($result->rowCount() > 0) {
-        echo "A tabela 'Tarefas' já existe.<br>";
-    } else {
-        $sql = "CREATE TABLE IF NOT EXISTS Tarefas (
+        $pdo->exec("DROP TABLE Tarefas");
+    }
+
+    $sql = "CREATE TABLE IF NOT EXISTS Tarefas (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 text VARCHAR(255) NOT NULL,
                 done BOOLEAN NOT NULL DEFAULT FALSE,
-                category VARCHAR(50) NOT NULL,
+                category VARCHAR(50) NOT NULL DEFAULT 'Outros',
                 doneAt DATE,
-                createdAt DATE NOT NULL,
-                `limit` DATE);";
+                createdAt DATE NOT NULL DEFAULT CURRENT_DATE,
+                limit_date DATE);";
 
         $pdo->exec($sql);
-        echo "Tabela 'Tarefas' criada com sucesso.<br>";
-    }
-
-    $faker = Faker\Factory::create();
+    echo "Tabela 'Tarefas' criada com sucesso.<br>";
+    
     $data = [];
     $categories = ['Frontend', 'Backend', 'Banco de dados', 'DevOps', 'Mobile', 'Outros'];
 
@@ -34,13 +35,13 @@ try {
             'category' => $faker->randomElement($categories),
             'doneAt' => $faker->optional()->date,
             'createdAt' => $faker->date,
-            'limit' => $faker->optional()->date
+            'limit_date' => $faker->optional()->date
         ];
     }
 
     $stmt = $pdo->prepare("
-            INSERT INTO Tarefas (text, done, category, doneAt, createdAt, `limit`)
-            VALUES (:text, :done, :category, :doneAt, :createdAt, :limit)
+            INSERT INTO Tarefas (text, done, category, doneAt, createdAt, limit_date)
+            VALUES (:text, :done, :category, :doneAt, :createdAt, :limit_date)
     ");
 
     foreach ($data as $item) {
