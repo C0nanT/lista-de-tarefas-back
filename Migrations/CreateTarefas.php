@@ -19,7 +19,7 @@ try {
         done BOOLEAN NOT NULL DEFAULT FALSE,
         category VARCHAR(50) NOT NULL DEFAULT 'Outros',
         doneAt DATE,
-        createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        createdAt DATE NOT NULL,
         limit_date DATE
     );";
 
@@ -31,13 +31,15 @@ try {
     $categories = ['Frontend', 'Backend', 'Banco de dados', 'DevOps', 'Mobile', 'Outros'];
 
     for ($i = 0; $i < 10; $i++) {
+        $done = $faker->boolean ? 1 : 0;
+        $doneAt = $done ? $faker->dateTimeThisYear->format('Y-m-d') : null;
         $data[] = [
             'description' => $faker->sentence,
-            'done' => $faker->boolean ? 1 : 0,
+            'done' => $done,
             'category' => $faker->randomElement($categories),
-            'doneAt' => $faker->optional()->date,
+            'doneAt' => $doneAt,
             'createdAt' => date('Y-m-d'),
-            'limit_date' => $faker->optional()->date
+            'limit_date' => $faker->dateTimeBetween('now', '+1 year')->format('Y-m-d')
         ];
     }
 

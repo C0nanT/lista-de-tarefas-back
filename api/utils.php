@@ -2,8 +2,10 @@
 require_once 'Classes/Database.php';
 require_once '../vendor/autoload.php';
 
+date_default_timezone_set('America/Sao_Paulo');
+
 header("Access-Control-Allow-Origin: http://localhost:3000");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT, PATCH");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
