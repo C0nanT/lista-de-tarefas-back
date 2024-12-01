@@ -24,7 +24,7 @@ class Tasks
 
     public function getTasks()
     {
-        $sql = "SELECT * FROM Tasks";
+        $sql = "SELECT * FROM Tasks ORDER BY limit_date ASC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
