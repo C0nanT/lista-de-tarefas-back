@@ -41,8 +41,11 @@ $ cd lista-de-tarefas-back
 # Instale as dependências
 $ composer install
 
-# Configure o banco de dados
-# Crie um banco de dados no MySQL e importe o arquivo database.sql
+# Clone o arquivo .env.example para .env (Linux/Mac)
+$ cp .env.example .env
+
+# Clone o arquivo .env.example para .env (Windows)
+$ copy .env.example .env
 
 # Configure o arquivo .env com as informações do banco de dados
 # Exemplo:
@@ -52,4 +55,6 @@ $ composer install
 # DB_PASSWORD=sua_senha
 
 # Inicie o servidor no Xampp, Laragon ou da forma que preferir
+
+# Acesse o index.php do projeto para a geração do banco de dados
 ```
