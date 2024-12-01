@@ -1,66 +1,46 @@
-# Lista de Tarefas - Backend
+# Lista de Tarefas Backend
 
-Este é o backend do projeto Lista de Tarefas, desenvolvido com Node.js e Express.
+Este é o projeto backend para a aplicação de lista de tarefas. Ele foi desenvolvido utilizando PHP no backend e React no frontend.
 
-## Requisitos
+## Frontend
 
-- Node.js
-- npm ou yarn
-- Banco de dados (ex: MongoDB, MySQL)
+O repositório do frontend pode ser encontrado aqui: [https://github.com/C0nanT/lista-de-tarefas-front](https://github.com/C0nanT/lista-de-tarefas-front)
+
+## Funcionalidades
+
+- Adicionar novas tarefas
+- Marcar tarefas como concluídas
+- Remover tarefas
+- Editar tarefas
+
+## Pré-requisitos
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+- [PHP](https://www.php.net/)
+- [Composer](https://getcomposer.org/)
+- [MySQL](https://www.mysql.com/)
 
 ## Instalação
 
-1. Clone o repositório:
-    ```bash
-    git clone https://github.com/seu-usuario/lista-de-tarefas-back.git
-    ```
-2. Navegue até o diretório do projeto:
-    ```bash
-    cd lista-de-tarefas-back
-    ```
-3. Instale as dependências:
-    ```bash
-    npm install
-    ```
-    ou
-    ```bash
-    yarn install
-    ```
+```bash
+# Clone este repositório
+$ git clone https://github.com/C0nanT/lista-de-tarefas-back
 
-## Configuração
+# Acesse a pasta do projeto no terminal/cmd
+$ cd lista-de-tarefas-back
 
-1. Crie um arquivo `.env` na raiz do projeto e configure as variáveis de ambiente necessárias:
-    ```env
-    PORT=3000
-    DB_CONNECTION_STRING=sua-string-de-conexao
-    ```
+# Instale as dependências
+$ composer install
 
-## Execução
+# Configure o banco de dados
+# Crie um banco de dados no MySQL e importe o arquivo database.sql
 
-1. Inicie o servidor:
-    ```bash
-    npm start
-    ```
-    ou
-    ```bash
-    yarn start
-    ```
+# Configure o arquivo .env com as informações do banco de dados
+# Exemplo:
+# DB_HOST=localhost
+# DB_DATABASE=nome_do_banco
+# DB_USERNAME=seu_usuario
+# DB_PASSWORD=sua_senha
 
-## Endpoints
-
-- `GET /tarefas` - Lista todas as tarefas
-- `POST /tarefas` - Cria uma nova tarefa
-- `PUT /tarefas/:id` - Atualiza uma tarefa existente
-- `DELETE /tarefas/:id` - Remove uma tarefa
-
-## Contribuição
-
-1. Faça um fork do projeto
-2. Crie uma nova branch (`git checkout -b feature/nova-feature`)
-3. Faça suas alterações e commit (`git commit -am 'Adiciona nova feature'`)
-4. Envie para o repositório remoto (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+# Inicie o servidor no Xampp, Laragon ou da forma que preferir
+```
