@@ -16,6 +16,11 @@ $pdo = Database::getInstance()->getConnection();
 
 function logMessage($message)
 {
+    $logDir = __DIR__ . '/../logs';
+    if (!is_dir($logDir)) {
+        mkdir($logDir, 0777, true);
+    }
+
     $timestamp = date('Y-m-d H:i:s');
-    error_log("[$timestamp] $message\n", 3, __DIR__ . '/../logs/tasks.log');
+    error_log("[$timestamp] $message\n", 3, $logDir . '/tasks.log');
 }
