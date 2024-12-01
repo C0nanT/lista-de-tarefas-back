@@ -41,6 +41,12 @@ $ cd lista-de-tarefas-back
 # Instale as dependências
 $ composer install
 
+# Clone o arquivo .env.example para .env (Unix)
+$ cp .env.example .env
+
+# Clone o arquivo .env.example para .env (Windows)
+$ copy .env.example .env
+
 # Configure o banco de dados
 # Crie um banco de dados no MySQL e importe o arquivo database.sql
 
