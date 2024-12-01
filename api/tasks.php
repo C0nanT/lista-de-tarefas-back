@@ -46,7 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'category' => $category,
                     'limit_date' => $limitDate,
                     'createdAt' => date('d/m/Y'),
-                    'id' => $pdo->lastInsertId()
+                    'id' => $pdo->lastInsertId(),
+                    'done' => 0,
+                    'doneAt' => null
                 ]
             ], JSON_UNESCAPED_UNICODE);
         } catch (Exception $e) {
