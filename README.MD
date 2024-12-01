@@ -56,5 +56,5 @@ $ copy .env.example .env
 
 # Inicie o servidor no Xampp, Laragon ou da forma que preferir
 
-# Acesse o index do projeto para a geração do banco de dados
+# Acesse o index.php do projeto para a geração do banco de dados
 ```
