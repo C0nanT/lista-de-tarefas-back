@@ -55,6 +55,9 @@ $ copy .env.example .env
 # DB_PASSWORD=sua_senha
 
 # Inicie o servidor no Xampp, Laragon ou da forma que preferir
-
-# Acesse o index.php do projeto para a geração do banco de dados
 ```
+## Como usar
+
+Acesse o index.php do projeto para a geração do banco de dados
+
+
