@@ -20,6 +20,15 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 - [Composer](https://getcomposer.org/)
 - [MySQL](https://www.mysql.com/)
 
+## Recomendação de Ambiente
+
+Para um ambiente de desenvolvimento mais fácil e rápido, recomendo o uso do [Laragon](https://laragon.org/) ou [XAMPP](https://www.apachefriends.org/index.html). Ambos fornecem uma maneira simples de configurar um servidor local com PHP, MySQL e outras ferramentas necessárias.
+
+- **Laragon**: É uma ótima opção para desenvolvedores que procuram um ambiente leve e rápido. Ele vem com uma interface amigável e várias ferramentas úteis.
+- **XAMPP**: É uma das opções mais populares e amplamente utilizadas. Ele é fácil de instalar e configurar, e possui uma grande comunidade de suporte.
+
+Escolha a ferramenta que melhor se adapta às suas necessidades e siga as instruções de instalação fornecidas pelos respectivos sites.
+
 ## Instalação
 
 ```bash
